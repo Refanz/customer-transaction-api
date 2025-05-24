@@ -20,20 +20,19 @@ object ResponseUtil {
     fun <T> buildResponseWithPaging(
         httpStatus: HttpStatus,
         message: String,
-        data: T,
         page: Page<T>
     ): ResponseEntity<CommonResponse<T>> {
         val pagingResponse = PagingResponse(
             totalPages = page.totalPages,
-            page = page.pageable.pageNumber,
+            page = page.pageable.pageNumber + 1,
             totalItems = page.totalElements,
             size = page.size
         )
 
-        val response = CommonResponse<T>(
+        val response = CommonResponse(
             status = httpStatus.name,
             message = message,
-            data = data,
+            data = page.content as T,
             paging = pagingResponse
         )
 

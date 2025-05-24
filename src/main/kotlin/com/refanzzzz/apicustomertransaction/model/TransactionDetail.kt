@@ -7,7 +7,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "transaction_details")
+@Table(name = "t_transaction_details")
 data class TransactionDetail(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

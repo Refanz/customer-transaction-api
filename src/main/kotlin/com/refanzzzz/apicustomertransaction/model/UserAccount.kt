@@ -7,8 +7,8 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "users")
-data class User(
+@Table(name = "m_user_accounts")
+data class UserAccount(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: String

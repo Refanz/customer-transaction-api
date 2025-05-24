@@ -4,7 +4,10 @@ open class SearchingPagingSortingRequest(
     val query: String? = null,
     val page: Int? = null,
     val size: Int? = null,
-    val sortBy: String? = null,
+    val sortBy: String? = null
 ) {
-    fun getPage(): Int = if (page!! <= 0) 0 else page - 1
+    val pageNumber: Int = page!!
+        get() {
+            return if (field <= 0) 0 else field - 1
+        }
 }
