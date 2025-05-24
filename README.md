@@ -216,17 +216,17 @@ The API uses a token-based authentication mechanism (e.g., JWT).
 
 * **Backend Framework:** Spring Boot
 
-* **Language:** Java
+* **Language:** Kotlin
 
-* **Build Tool:** Maven / Gradle (to be decided during implementation)
+* **Build Tool:** Gradle
 
-* **Database:** (e.g., PostgreSQL, MySQL, H2 for development)
+* **Database:** PostgreSQL
 
 * **Security:** Spring Security
 
 * **Data Access:** Spring Data JPA / Hibernate
 
-* **API Documentation:** (e.g., OpenAPI/Swagger UI - optional but recommended)
+* **API Documentation:** OpenAPI/Swagger UI
 
 ## Setup & Running the Project
 
@@ -251,11 +251,6 @@ cd customer-transaction-api
   username, password).
 
 4. **Build the project:**
-   Using Maven:
-
-```bash
-mvn clean install
-```
 
 Using Gradle:
 
@@ -264,11 +259,6 @@ Using Gradle:
 ```
 
 5. **Run the application:**
-   Using Maven:
-
-```bash
-mvn spring-boot:run
-```
 
 Using Gradle:
 
