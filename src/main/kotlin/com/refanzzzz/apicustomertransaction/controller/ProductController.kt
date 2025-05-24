@@ -3,7 +3,7 @@ package com.refanzzzz.apicustomertransaction.controller
 import com.refanzzzz.apicustomertransaction.dto.request.ProductRequest
 import com.refanzzzz.apicustomertransaction.dto.request.SearchingPagingSortingRequest
 import com.refanzzzz.apicustomertransaction.service.ProductService
-import com.refanzzzz.apicustomertransaction.util.Constant
+import com.refanzzzz.apicustomertransaction.constant.Constant
 import com.refanzzzz.apicustomertransaction.util.ResponseUtil
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
