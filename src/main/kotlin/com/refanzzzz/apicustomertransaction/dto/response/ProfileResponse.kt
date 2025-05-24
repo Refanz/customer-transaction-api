@@ -1,13 +1,11 @@
 package com.refanzzzz.apicustomertransaction.dto.response
 
-data class CustomerResponse(
+data class ProfileResponse(
     val id: String,
-    val name: String,
-    val email: String,
     val username: String,
-    val role: List<String>,
+    val name: String,
     val birthdate: String,
     val birthplace: String,
-    val createdAt: String,
-    val updatedAt: String
+    val email: String,
+    val role: List<String>
 )

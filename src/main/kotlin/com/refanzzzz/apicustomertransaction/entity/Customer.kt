@@ -6,6 +6,8 @@ import jakarta.persistence.EntityListeners
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import jakarta.persistence.Temporal
 import jakarta.persistence.TemporalType
@@ -30,4 +32,8 @@ data class Customer(
 
     @Column(name = "birthplace", nullable = false)
     var birthplace: String? = null,
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    var user: User? = null
 ): Auditable()

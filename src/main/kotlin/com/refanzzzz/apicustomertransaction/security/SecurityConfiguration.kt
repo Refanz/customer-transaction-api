@@ -28,7 +28,7 @@ class SecurityConfiguration(private val jwtAuthenticationFilter: JWTAuthenticati
                 authorizeRequests
                     .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                     .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
+                    .requestMatchers(HttpMethod.POST, Constant.LOGIN_API).permitAll()
                     .anyRequest().authenticated()
             }
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)

@@ -28,7 +28,7 @@ class PaymentController(private val paymentService: PaymentService) {
 
         val paymentResponse = paymentService.getAllPayments(pagingRequest)
         return ResponseUtil.buildResponseWithPaging(
-            httpStatus = org.springframework.http.HttpStatus.OK,
+            httpStatus = HttpStatus.OK,
             message = "Success get all payments",
             page = paymentResponse
         )
@@ -40,7 +40,7 @@ class PaymentController(private val paymentService: PaymentService) {
     ): ResponseEntity<*> {
         val paymentResponse = paymentService.getPaymentById(id)
         return ResponseUtil.buildResponse(
-            httpStatus = org.springframework.http.HttpStatus.OK,
+            httpStatus = HttpStatus.OK,
             message = "Success get payment by id",
             data = paymentResponse
         )
@@ -48,7 +48,7 @@ class PaymentController(private val paymentService: PaymentService) {
 
     @PostMapping
     fun addNewPayment(
-        @RequestBody paymentRequest: com.refanzzzz.apicustomertransaction.dto.request.PaymentRequest
+        @RequestBody paymentRequest: PaymentRequest
     ): ResponseEntity<*> {
         val paymentResponse = paymentService.addPayment(paymentRequest)
         return ResponseUtil.buildResponse(

@@ -12,12 +12,16 @@ data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     var id: String? = null,
+
     @Column(name = "username", nullable = false, unique = true)
     private var username: String? = null,
+
     @Column(name = "password", nullable = false)
     private var password: String? = null,
+
     @Column(name = "email", nullable = false, unique = true)
     var email: String? = null,
+
     @Enumerated(EnumType.STRING)
     @Column(name = "roles", nullable = false)
     var roles: List<UserRole>? = null
@@ -30,6 +34,10 @@ data class User(
     }
 
     override fun getPassword(): String? = this.password
+
+    fun setPassword(password: String) {
+        this.password = password
+    }
 
     override fun getUsername(): String? = this.username
 
