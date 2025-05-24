@@ -41,6 +41,8 @@ class TaxServiceImpl(private val taxRepository: TaxRepository) : TaxService {
 
     @Transactional(rollbackFor = [Exception::class])
     override fun addTax(taxRequest: TaxRequest): TaxResponse {
+        println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        println(taxRequest.toString())
         val tax = Tax(
             name = taxRequest.name,
             rate = taxRequest.rate

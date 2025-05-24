@@ -76,9 +76,9 @@ class CustomerServiceImpl(private val customerRepository: CustomerRepository) : 
     private fun mapToCustomerResponse(customer: Customer): CustomerResponse {
         return CustomerResponse(
             id = customer.id!!,
-            name = customer.name,
+            name = customer.name!!,
             birthdate = customer.birthdate.toString(),
-            birthplace = customer.birthplace,
+            birthplace = customer.birthplace!!,
             createdAt = customer.createdAt.toString(),
             updatedAt = customer.updatedAt.toString()
         )

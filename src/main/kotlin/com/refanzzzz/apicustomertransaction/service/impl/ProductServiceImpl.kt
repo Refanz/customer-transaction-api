@@ -3,6 +3,7 @@ package com.refanzzzz.apicustomertransaction.service.impl
 import com.refanzzzz.apicustomertransaction.dto.request.ProductRequest
 import com.refanzzzz.apicustomertransaction.dto.request.SearchingPagingSortingRequest
 import com.refanzzzz.apicustomertransaction.dto.response.ProductResponse
+import com.refanzzzz.apicustomertransaction.dto.response.TaxProductResponse
 import com.refanzzzz.apicustomertransaction.entity.Product
 import com.refanzzzz.apicustomertransaction.repository.ProductRepository
 import com.refanzzzz.apicustomertransaction.service.ProductService
@@ -76,7 +77,16 @@ class ProductServiceImpl(private val productRepository: ProductRepository) : Pro
             name = product.name!!,
             price = product.price!!,
             createdAt = product.createdAt.toString(),
-            updatedAt = product.updatedAt.toString()
+            updatedAt = product.updatedAt.toString(),
+
+            taxDetails = product.taxDetails?.map { taxDetail ->
+                TaxProductResponse(
+                    id = taxDetail.id!!,
+                    taxAmount = taxDetail.taxAmount!!.toLong(),
+                    taxRate = taxDetail.taxRateAtSale!!,
+                    taxName = taxDetail.tax!!.name!!,
+                )
+            }?.toMutableList() ?: emptyList<TaxProductResponse>().toMutableList()
         )
     }
 }

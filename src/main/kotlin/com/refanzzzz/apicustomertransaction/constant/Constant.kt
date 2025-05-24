@@ -7,4 +7,5 @@ object Constant {
     const val CUSTOMER_API = "${BASE_API}/customers"
     const val PAYMENT_API = "${BASE_API}/payments"
     const val TAX_API = "${BASE_API}/taxes"
+    const val TRANSACTION_API = "${BASE_API}/transactions"
 }

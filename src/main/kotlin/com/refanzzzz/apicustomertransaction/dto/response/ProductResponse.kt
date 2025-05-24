@@ -5,5 +5,6 @@ data class ProductResponse(
     val name: String,
     val price: Long,
     val createdAt: String,
-    val updatedAt: String
+    val updatedAt: String,
+    var taxDetails: MutableList<TaxProductResponse>? = null
 )

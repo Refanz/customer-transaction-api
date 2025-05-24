@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.stereotype.Repository
 
 @Repository
-interface TransactionDetailRepository : JpaRepository<TransactionDetailRepository, String>,
+interface TransactionDetailRepository : JpaRepository<TransactionDetail, String>,
     JpaSpecificationExecutor<TransactionDetail> {
 }

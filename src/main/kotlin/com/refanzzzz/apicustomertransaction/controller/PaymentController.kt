@@ -1,6 +1,7 @@
 package com.refanzzzz.apicustomertransaction.controller
 
 import com.refanzzzz.apicustomertransaction.constant.Constant
+import com.refanzzzz.apicustomertransaction.dto.request.PaymentRequest
 import com.refanzzzz.apicustomertransaction.dto.request.SearchingPagingSortingRequest
 import com.refanzzzz.apicustomertransaction.service.PaymentService
 import com.refanzzzz.apicustomertransaction.util.ResponseUtil
@@ -60,7 +61,7 @@ class PaymentController(private val paymentService: PaymentService) {
     @PutMapping("/{id}")
     fun updatePaymentById(
         @PathVariable id: String,
-        @RequestBody paymentRequest: com.refanzzzz.apicustomertransaction.dto.request.PaymentRequest
+        @RequestBody paymentRequest: PaymentRequest
     ): ResponseEntity<*> {
         val paymentResponse = paymentService.updatePaymentById(id, paymentRequest)
         return ResponseUtil.buildResponse(

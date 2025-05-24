@@ -1,10 +1,13 @@
 package com.refanzzzz.apicustomertransaction.entity
 
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 
 @Entity
@@ -16,4 +19,8 @@ data class Payment(
 
     @Column(name = "method", nullable = false)
     var method: String? = null,
-): Auditable()
+
+    @OneToOne(cascade = [CascadeType.MERGE])
+    @JoinColumn(name = "transaction_id")
+    var transaction: Transaction? = null
+) : Auditable()

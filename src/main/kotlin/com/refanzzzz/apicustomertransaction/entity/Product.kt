@@ -13,5 +13,9 @@ class Product(
     var name: String? = null,
 
     @Column(name = "price", nullable = false)
-    var price: Long? = null
+    var price: Long? = null,
+
+    @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL])
+    var taxDetails: MutableList<TaxDetail>? = null
+
 ) : Auditable()

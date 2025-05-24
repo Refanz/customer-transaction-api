@@ -20,11 +20,14 @@ data class Customer(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: String? = null,
+
     @Column(name = "name", nullable = false)
-    var name: String,
+    var name: String? = null,
+
     @Temporal(TemporalType.DATE)
     @Column(name = "birthdate", nullable = false)
-    var birthdate: LocalDate,
+    var birthdate: LocalDate? = null,
+
     @Column(name = "birthplace", nullable = false)
-    var birthplace: String,
+    var birthplace: String? = null,
 ): Auditable()
