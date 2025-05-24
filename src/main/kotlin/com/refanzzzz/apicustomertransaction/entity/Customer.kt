@@ -1,4 +1,4 @@
-package com.refanzzzz.apicustomertransaction.model
+package com.refanzzzz.apicustomertransaction.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -10,6 +10,7 @@ import jakarta.persistence.Table
 import jakarta.persistence.Temporal
 import jakarta.persistence.TemporalType
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity
@@ -18,12 +19,12 @@ import java.time.LocalDateTime
 data class Customer(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    val id: String,
+    val id: String? = null,
     @Column(name = "name", nullable = false)
-    val name: String,
-    @Temporal(TemporalType.TIMESTAMP)
+    var name: String,
+    @Temporal(TemporalType.DATE)
     @Column(name = "birthdate", nullable = false)
-    val birthdate: LocalDateTime,
+    var birthdate: LocalDate,
     @Column(name = "birthplace", nullable = false)
-    val birthplace: String,
+    var birthplace: String,
 ): Auditable()

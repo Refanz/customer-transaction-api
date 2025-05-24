@@ -2,7 +2,7 @@ package com.refanzzzz.apicustomertransaction.service.impl
 
 import com.refanzzzz.apicustomertransaction.dto.request.LoginRequest
 import com.refanzzzz.apicustomertransaction.dto.response.LoginResponse
-import com.refanzzzz.apicustomertransaction.model.User
+import com.refanzzzz.apicustomertransaction.entity.User
 import com.refanzzzz.apicustomertransaction.repository.UserRepository
 import com.refanzzzz.apicustomertransaction.service.AuthService
 import com.refanzzzz.apicustomertransaction.service.JWTService

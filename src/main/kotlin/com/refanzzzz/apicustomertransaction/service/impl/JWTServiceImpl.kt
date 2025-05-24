@@ -3,7 +3,7 @@ package com.refanzzzz.apicustomertransaction.service.impl
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.interfaces.DecodedJWT
-import com.refanzzzz.apicustomertransaction.model.User
+import com.refanzzzz.apicustomertransaction.entity.User
 import com.refanzzzz.apicustomertransaction.service.JWTService
 import com.refanzzzz.apicustomertransaction.util.JWTUtil
 import jakarta.servlet.http.HttpServletRequest

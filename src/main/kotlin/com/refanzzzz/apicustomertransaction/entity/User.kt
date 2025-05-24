@@ -1,4 +1,4 @@
-package com.refanzzzz.apicustomertransaction.model
+package com.refanzzzz.apicustomertransaction.entity
 
 import com.refanzzzz.apicustomertransaction.constant.UserRole
 import jakarta.persistence.*
@@ -21,7 +21,7 @@ data class User(
     @Enumerated(EnumType.STRING)
     @Column(name = "roles", nullable = false)
     var roles: List<UserRole>? = null
-) : UserDetails {
+) : UserDetails, Auditable() {
 
     override fun getAuthorities(): Collection<GrantedAuthority?>? {
         return roles!!.stream()

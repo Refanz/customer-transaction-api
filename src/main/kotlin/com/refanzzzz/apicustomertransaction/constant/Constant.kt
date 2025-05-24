@@ -2,6 +2,9 @@ package com.refanzzzz.apicustomertransaction.constant
 
 object Constant {
     const val BASE_API = "/api/v1"
-    const val PRODUCT_API = "/api/v1/products"
+    const val PRODUCT_API = "${BASE_API}/products"
     const val LOGIN_API = "${BASE_API}/login"
+    const val CUSTOMER_API = "${BASE_API}/customers"
+    const val PAYMENT_API = "${BASE_API}/payments"
+    const val TAX_API = "${BASE_API}/taxes"
 }

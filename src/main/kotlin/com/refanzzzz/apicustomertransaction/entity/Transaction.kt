@@ -1,4 +1,4 @@
-package com.refanzzzz.apicustomertransaction.model
+package com.refanzzzz.apicustomertransaction.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -12,4 +12,4 @@ data class Transaction(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: String
-)
+): Auditable()

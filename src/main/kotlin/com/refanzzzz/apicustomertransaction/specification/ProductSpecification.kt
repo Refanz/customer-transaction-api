@@ -1,7 +1,7 @@
 package com.refanzzzz.apicustomertransaction.specification
 
 import com.refanzzzz.apicustomertransaction.dto.request.SearchingPagingSortingRequest
-import com.refanzzzz.apicustomertransaction.model.Product
+import com.refanzzzz.apicustomertransaction.entity.Product
 import jakarta.persistence.criteria.Predicate
 import org.springframework.data.jpa.domain.Specification
 

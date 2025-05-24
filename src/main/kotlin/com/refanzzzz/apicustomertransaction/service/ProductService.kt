@@ -3,7 +3,7 @@ package com.refanzzzz.apicustomertransaction.service
 import com.refanzzzz.apicustomertransaction.dto.request.ProductRequest
 import com.refanzzzz.apicustomertransaction.dto.request.SearchingPagingSortingRequest
 import com.refanzzzz.apicustomertransaction.dto.response.ProductResponse
-import com.refanzzzz.apicustomertransaction.model.Product
+import com.refanzzzz.apicustomertransaction.entity.Product
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
 

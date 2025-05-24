@@ -1,7 +1,7 @@
 package com.refanzzzz.apicustomertransaction.service.impl
 
 import com.refanzzzz.apicustomertransaction.constant.UserRole
-import com.refanzzzz.apicustomertransaction.model.User
+import com.refanzzzz.apicustomertransaction.entity.User
 import com.refanzzzz.apicustomertransaction.repository.UserRepository
 import com.refanzzzz.apicustomertransaction.service.UserService
 import jakarta.annotation.PostConstruct

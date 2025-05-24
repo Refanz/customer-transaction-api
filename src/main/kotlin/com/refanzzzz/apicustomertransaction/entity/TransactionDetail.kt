@@ -1,4 +1,4 @@
-package com.refanzzzz.apicustomertransaction.model
+package com.refanzzzz.apicustomertransaction.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -16,4 +16,4 @@ data class TransactionDetail(
     val productId: String,
     val quantity: Int,
     val price: Double
-)
+): Auditable()

@@ -1,10 +1,11 @@
 package com.refanzzzz.apicustomertransaction.repository
 
-import com.refanzzzz.apicustomertransaction.entity.Product
+import com.refanzzzz.apicustomertransaction.entity.TransactionDetail
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ProductRepository : JpaRepository<Product, String>, JpaSpecificationExecutor<Product> {
+interface TransactionDetailRepository : JpaRepository<TransactionDetailRepository, String>,
+    JpaSpecificationExecutor<TransactionDetail> {
 }

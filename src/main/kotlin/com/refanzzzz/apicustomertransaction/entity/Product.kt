@@ -1,4 +1,4 @@
-package com.refanzzzz.apicustomertransaction.model
+package com.refanzzzz.apicustomertransaction.entity
 
 import jakarta.persistence.*
 
