@@ -7,6 +7,7 @@ import com.refanzzzz.apicustomertransaction.constant.Constant
 import com.refanzzzz.apicustomertransaction.util.ResponseUtil
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -15,6 +16,7 @@ class ProductController(
     private val productService: ProductService
 ) {
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/{id}")
     fun getProductById(
         @PathVariable id: String
@@ -23,6 +25,7 @@ class ProductController(
         return ResponseUtil.buildResponse(HttpStatus.OK, "Success get product by id", productResponse)
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping
     fun getAllProducts(
         @RequestParam(required = false, name = "q") query: String? = null,
@@ -45,6 +48,7 @@ class ProductController(
         )
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     fun addNewProduct(
         @RequestBody productRequest: ProductRequest
@@ -53,6 +57,7 @@ class ProductController(
         return ResponseUtil.buildResponse(HttpStatus.CREATED, "Success add new product", productResponse)
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/{id}")
     fun deleteProductById(
         @PathVariable id: String
@@ -61,6 +66,7 @@ class ProductController(
         return ResponseUtil.buildResponse(HttpStatus.OK, "Success delete product", null)
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/{id}")
     fun updateProductById(
         @PathVariable id: String,

@@ -7,12 +7,14 @@ import com.refanzzzz.apicustomertransaction.service.TaxService
 import com.refanzzzz.apicustomertransaction.util.ResponseUtil
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(Constant.TAX_API)
 class TaxController(private val taxService: TaxService) {
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping
     fun getAllTaxes(
         @RequestParam(required = false, name = "page", defaultValue = "1") page: Int? = null,
@@ -30,6 +32,7 @@ class TaxController(private val taxService: TaxService) {
         return ResponseUtil.buildResponseWithPaging(HttpStatus.OK, "Success get all taxes", page)
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/{id}")
     fun getTaxById(
         @PathVariable id: String
@@ -38,6 +41,7 @@ class TaxController(private val taxService: TaxService) {
         return ResponseUtil.buildResponse(HttpStatus.OK, "Success get tax by id", taxResponse)
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     fun addNewTax(
         @RequestBody taxRequest: TaxRequest
@@ -46,6 +50,7 @@ class TaxController(private val taxService: TaxService) {
         return ResponseUtil.buildResponse(HttpStatus.CREATED, "Success add new tax", taxResponse)
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/{id}")
     fun updateTaxById(
         @PathVariable id: String,
@@ -55,6 +60,7 @@ class TaxController(private val taxService: TaxService) {
         return ResponseUtil.buildResponse(HttpStatus.OK, "Success update tax by id", taxResponse)
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/{id}")
     fun deleteTaxById(
         @PathVariable id: String

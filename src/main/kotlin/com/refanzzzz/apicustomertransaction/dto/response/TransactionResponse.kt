@@ -5,6 +5,7 @@ data class TransactionResponse(
     val customerName: String,
     val paymentMethod: String,
     val paymentStatus: String,
+    val transactionDate: String,
     val createdAt: String,
     val updatedAt: String,
     val transactionDetails: MutableList<TransactionDetailResponse>,

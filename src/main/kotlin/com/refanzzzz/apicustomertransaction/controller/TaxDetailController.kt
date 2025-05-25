@@ -6,12 +6,14 @@ import com.refanzzzz.apicustomertransaction.service.TaxDetailService
 import com.refanzzzz.apicustomertransaction.util.ResponseUtil
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(Constant.TAX_API)
 class TaxDetailController(private val taxDetailService: TaxDetailService) {
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/details")
     fun getAllTaxDetails(
         @RequestParam(required = false, name = "page", defaultValue = "1") page: Int? = null,
@@ -33,6 +35,7 @@ class TaxDetailController(private val taxDetailService: TaxDetailService) {
         )
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/details/{id}")
     fun getTaxDetailById(
         @PathVariable id: String
@@ -41,6 +44,7 @@ class TaxDetailController(private val taxDetailService: TaxDetailService) {
         return ResponseUtil.buildResponse(HttpStatus.OK, "Success get tax detail by id", taxDetailResponse)
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/details")
     fun addTaxDetail(
         @RequestBody taxDetailRequest: com.refanzzzz.apicustomertransaction.dto.request.TaxDetailRequest
@@ -49,6 +53,7 @@ class TaxDetailController(private val taxDetailService: TaxDetailService) {
         return ResponseUtil.buildResponse(HttpStatus.CREATED, "Success add new tax detail", taxDetailResponse)
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/details/{id}")
     fun deleteTaxDetailById(
         @PathVariable id: String
@@ -57,6 +62,7 @@ class TaxDetailController(private val taxDetailService: TaxDetailService) {
         return ResponseUtil.buildResponse(HttpStatus.NO_CONTENT, "Success delete tax detail by id", null)
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/details/{id}")
     fun updateTaxDetailById(
         @PathVariable id: String,

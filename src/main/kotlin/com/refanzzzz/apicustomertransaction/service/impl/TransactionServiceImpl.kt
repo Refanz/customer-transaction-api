@@ -1,10 +1,7 @@
 package com.refanzzzz.apicustomertransaction.service.impl
 
 import com.refanzzzz.apicustomertransaction.constant.PaymentStatus
-import com.refanzzzz.apicustomertransaction.dto.request.SearchingPagingSortingRequest
-import com.refanzzzz.apicustomertransaction.dto.request.TransactionDetailRequest
-import com.refanzzzz.apicustomertransaction.dto.request.TransactionRequest
-import com.refanzzzz.apicustomertransaction.dto.request.TransactionUpdateRequest
+import com.refanzzzz.apicustomertransaction.dto.request.*
 import com.refanzzzz.apicustomertransaction.dto.response.TransactionDetailResponse
 import com.refanzzzz.apicustomertransaction.dto.response.TransactionResponse
 import com.refanzzzz.apicustomertransaction.entity.Transaction
@@ -12,9 +9,11 @@ import com.refanzzzz.apicustomertransaction.entity.TransactionDetail
 import com.refanzzzz.apicustomertransaction.repository.TransactionDetailRepository
 import com.refanzzzz.apicustomertransaction.repository.TransactionRepository
 import com.refanzzzz.apicustomertransaction.service.*
+import com.refanzzzz.apicustomertransaction.specification.TransactionSpecification
 import com.refanzzzz.apicustomertransaction.util.SortUtil
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.jpa.domain.Specification
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -90,11 +89,35 @@ class TransactionServiceImpl(
     }
 
     @Transactional(readOnly = true)
-    override fun getAllTransactions(request: SearchingPagingSortingRequest): Page<TransactionResponse> {
+    override fun getAllTransactions(
+        request: SearchingPagingSortingRequest,
+        filterRequest: TransactionFilterRequest
+    ): Page<TransactionResponse> {
+
+        var specifications: Specification<Transaction> = Specification.where(null)
+
+        TransactionSpecification.byDateRange(filterRequest.startDate, filterRequest.endDate).let {
+            specifications = specifications.and(it)
+        }
+
+        TransactionSpecification.byCustomerName(filterRequest.customerName).let {
+            specifications = specifications.and(it)
+        }
+
+        TransactionSpecification.byPaymentStatus(filterRequest.paymentStatus).let {
+            specifications = specifications.and(it)
+        }
+
+        TransactionSpecification.byPaymentMethod(filterRequest.paymentMethod).let {
+            specifications = specifications.and(it)
+        }
+
+
         val sortBy = SortUtil.parseSort(request.sortBy!!)
         val pageable = PageRequest.of(request.pageNumber, request.size!!, sortBy)
 
-        val page = transactionRepository.findAll(pageable)
+        val page = transactionRepository.findAll(specifications, pageable)
+
         return page.map(this::mapToTransactionResponse)
     }
 
@@ -147,6 +170,7 @@ class TransactionServiceImpl(
             paymentStatus = PaymentStatus.getStatusByName(transaction.paymentStatus!!.name),
             createdAt = transaction.createdAt.toString(),
             updatedAt = transaction.updatedAt.toString(),
+            transactionDate = transaction.transactionDate.toString(),
 
             transactionDetails = transaction.transactionDetails?.map { detail ->
                 TransactionDetailResponse(

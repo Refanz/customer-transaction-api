@@ -7,12 +7,14 @@ import com.refanzzzz.apicustomertransaction.service.PaymentService
 import com.refanzzzz.apicustomertransaction.util.ResponseUtil
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(Constant.PAYMENT_API)
 class PaymentController(private val paymentService: PaymentService) {
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping
     fun getAllPayments(
         @RequestParam(required = false, name = "page", defaultValue = "1") page: Int? = null,
@@ -34,6 +36,7 @@ class PaymentController(private val paymentService: PaymentService) {
         )
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/{id}")
     fun getPaymentById(
         @PathVariable id: String
@@ -46,6 +49,7 @@ class PaymentController(private val paymentService: PaymentService) {
         )
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     fun addNewPayment(
         @RequestBody paymentRequest: PaymentRequest
@@ -58,6 +62,7 @@ class PaymentController(private val paymentService: PaymentService) {
         )
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/{id}")
     fun updatePaymentById(
         @PathVariable id: String,
@@ -71,6 +76,7 @@ class PaymentController(private val paymentService: PaymentService) {
         )
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/{id}")
     fun deletePaymentById(
         @PathVariable id: String

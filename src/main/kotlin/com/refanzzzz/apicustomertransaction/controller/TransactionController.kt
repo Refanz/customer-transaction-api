@@ -1,8 +1,10 @@
 package com.refanzzzz.apicustomertransaction.controller
 
 import com.refanzzzz.apicustomertransaction.constant.Constant
+import com.refanzzzz.apicustomertransaction.constant.PaymentStatus
 import com.refanzzzz.apicustomertransaction.dto.request.SearchingPagingSortingRequest
 import com.refanzzzz.apicustomertransaction.dto.request.TransactionDetailRequest
+import com.refanzzzz.apicustomertransaction.dto.request.TransactionFilterRequest
 import com.refanzzzz.apicustomertransaction.dto.request.TransactionRequest
 import com.refanzzzz.apicustomertransaction.dto.request.TransactionUpdateRequest
 import com.refanzzzz.apicustomertransaction.service.TransactionService
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDateTime
 
 @RestController
 @RequestMapping(Constant.TRANSACTION_API)
@@ -44,14 +47,23 @@ class TransactionController(private val transactionService: TransactionService) 
     fun getAllTransactions(
         @RequestParam(required = false, name = "page", defaultValue = "1") page: Int? = null,
         @RequestParam(required = false, name = "size", defaultValue = "10") size: Int? = null,
-        @RequestParam(required = false, name = "sort", defaultValue = "id") sortBy: String? = null,
+        @RequestParam(required = false, name = "sort", defaultValue = "transactionDate") sortBy: String? = null,
+        @RequestParam(required = false, name = "startDate") startDate: LocalDateTime? = null,
+        @RequestParam(required = false, name = "endDate") endDate: LocalDateTime? = null,
+        @RequestParam(required = false, name = "customerName") customerName: String? = null
     ): ResponseEntity<*> {
+        val filterTransaction = TransactionFilterRequest(
+            startDate = startDate,
+            endDate = endDate,
+            customerName = customerName
+        )
+
         val response = transactionService.getAllTransactions(
             SearchingPagingSortingRequest(
                 page = page,
                 size = size,
                 sortBy = sortBy
-            )
+            ), filterTransaction
         )
         return ResponseUtil.buildResponseWithPaging(HttpStatus.OK, "Success get all transactions", response)
     }

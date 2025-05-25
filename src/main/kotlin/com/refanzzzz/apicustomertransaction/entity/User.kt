@@ -41,6 +41,10 @@ data class User(
 
     override fun getUsername(): String? = this.username
 
+    fun setUsername(username: String) {
+        this.username = username
+    }
+
     override fun isAccountNonExpired() = true
 
     override fun isAccountNonLocked() = true
