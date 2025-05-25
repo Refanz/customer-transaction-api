@@ -1,14 +1,12 @@
 package com.refanzzzz.apicustomertransaction.service
 
-import com.refanzzzz.apicustomertransaction.dto.request.SearchingPagingSortingRequest
-import com.refanzzzz.apicustomertransaction.dto.request.TransactionDetailRequest
-import com.refanzzzz.apicustomertransaction.dto.request.TransactionFilterRequest
-import com.refanzzzz.apicustomertransaction.dto.request.TransactionRequest
-import com.refanzzzz.apicustomertransaction.dto.request.TransactionUpdateRequest
-import com.refanzzzz.apicustomertransaction.dto.response.TransactionDetailResponse
+import com.refanzzzz.apicustomertransaction.dto.report.CustomerSpendingReport
+import com.refanzzzz.apicustomertransaction.dto.report.ProductReport
+import com.refanzzzz.apicustomertransaction.dto.request.*
 import com.refanzzzz.apicustomertransaction.dto.response.TransactionResponse
 import com.refanzzzz.apicustomertransaction.entity.Transaction
 import org.springframework.data.domain.Page
+import java.time.LocalDateTime
 
 interface TransactionService {
     fun getAllTransactions(request: SearchingPagingSortingRequest, filterRequest: TransactionFilterRequest): Page<TransactionResponse>
@@ -18,4 +16,7 @@ interface TransactionService {
     fun getTransaction(id: String): Transaction
     fun createTransaction(transactionRequest: TransactionRequest): TransactionResponse
     fun addTransactionDetails(id: String, transactionDetailRequest: MutableList<TransactionDetailRequest>): TransactionResponse
+    fun getTotalAmountSpendByCustomerBetweenDatetime(startDate: LocalDateTime, endDate: LocalDateTime): List<CustomerSpendingReport>
+    fun getTotalAmountByCustomer(): List<CustomerSpendingReport>
+    fun getTotalAmountSpendByProduct(): List<ProductReport>
 }

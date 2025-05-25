@@ -1,25 +1,12 @@
 package com.refanzzzz.apicustomertransaction.controller
 
 import com.refanzzzz.apicustomertransaction.constant.Constant
-import com.refanzzzz.apicustomertransaction.constant.PaymentStatus
-import com.refanzzzz.apicustomertransaction.dto.request.SearchingPagingSortingRequest
-import com.refanzzzz.apicustomertransaction.dto.request.TransactionDetailRequest
-import com.refanzzzz.apicustomertransaction.dto.request.TransactionFilterRequest
-import com.refanzzzz.apicustomertransaction.dto.request.TransactionRequest
-import com.refanzzzz.apicustomertransaction.dto.request.TransactionUpdateRequest
+import com.refanzzzz.apicustomertransaction.dto.request.*
 import com.refanzzzz.apicustomertransaction.service.TransactionService
 import com.refanzzzz.apicustomertransaction.util.ResponseUtil
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime
 
 @RestController
@@ -91,5 +78,26 @@ class TransactionController(private val transactionService: TransactionService) 
     ): ResponseEntity<*> {
         val response = transactionService.updateTransaction(id, transactionRequest)
         return ResponseUtil.buildResponse(HttpStatus.OK, "Success update transaction by id", response)
+    }
+
+    @GetMapping("/reports/customer-spending-by-date")
+    fun getCustomerSpendingByDate(
+        @RequestParam startDate: LocalDateTime,
+        @RequestParam endDate: LocalDateTime
+    ): ResponseEntity<*> {
+        val response = transactionService.getTotalAmountSpendByCustomerBetweenDatetime(startDate, endDate)
+        return ResponseUtil.buildResponse(HttpStatus.OK, "Success get customer spending by date", response)
+    }
+
+    @GetMapping("reports/customer-spending")
+    fun getCustomerSpending(): ResponseEntity<*> {
+        val response = transactionService.getTotalAmountByCustomer()
+        return ResponseUtil.buildResponse(HttpStatus.OK, "Success get customer spending", response)
+    }
+
+    @GetMapping("/reports/product-spending")
+    fun getProductSpending(): ResponseEntity<*> {
+        val response = transactionService.getTotalAmountSpendByProduct()
+        return ResponseUtil.buildResponse(HttpStatus.OK, "Success get product spending", response)
     }
 }

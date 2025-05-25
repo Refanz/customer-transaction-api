@@ -20,12 +20,12 @@ data class TaxDetail(
     var product: Product? = null,
 
     @ManyToOne
-    @JoinColumn(name = "tax_id")
+    @JoinColumn(name = "tax_id", nullable = false)
     var tax: Tax? = null,
 
     @Column(name = "tax_rate_at_sale", nullable = false)
-    var taxRateAtSale: Double? = 0.0,
+    var taxRateAtSale: Double? = null,
 
     @Column(name = "tax_amount", nullable = false)
-    var taxAmount: Double? = 0.0,
+    var taxAmount: Double? = null,
 ) : Auditable()

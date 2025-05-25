@@ -1,6 +1,8 @@
 package com.refanzzzz.apicustomertransaction.service.impl
 
 import com.refanzzzz.apicustomertransaction.constant.PaymentStatus
+import com.refanzzzz.apicustomertransaction.dto.report.CustomerSpendingReport
+import com.refanzzzz.apicustomertransaction.dto.report.ProductReport
 import com.refanzzzz.apicustomertransaction.dto.request.*
 import com.refanzzzz.apicustomertransaction.dto.response.TransactionDetailResponse
 import com.refanzzzz.apicustomertransaction.dto.response.TransactionResponse
@@ -18,6 +20,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.server.ResponseStatusException
+import java.time.LocalDateTime
 
 @Service
 class TransactionServiceImpl(
@@ -89,6 +92,24 @@ class TransactionServiceImpl(
     }
 
     @Transactional(readOnly = true)
+    override fun getTotalAmountSpendByCustomerBetweenDatetime(
+        startDate: LocalDateTime,
+        endDate: LocalDateTime
+    ): List<CustomerSpendingReport> {
+        return transactionRepository.getTotalAmountSpendByCustomerBetweenDatetime(startDate, endDate)
+    }
+
+    @Transactional(readOnly = true)
+    override fun getTotalAmountByCustomer(): List<CustomerSpendingReport> {
+        return transactionRepository.getTotalAmountSpendByCustomer()
+    }
+
+    @Transactional(readOnly = true)
+    override fun getTotalAmountSpendByProduct(): List<ProductReport> {
+        return transactionRepository.getTotalAmountSpendByProduct()
+    }
+
+    @Transactional(readOnly = true)
     override fun getAllTransactions(
         request: SearchingPagingSortingRequest,
         filterRequest: TransactionFilterRequest
@@ -103,15 +124,6 @@ class TransactionServiceImpl(
         TransactionSpecification.byCustomerName(filterRequest.customerName).let {
             specifications = specifications.and(it)
         }
-
-        TransactionSpecification.byPaymentStatus(filterRequest.paymentStatus).let {
-            specifications = specifications.and(it)
-        }
-
-        TransactionSpecification.byPaymentMethod(filterRequest.paymentMethod).let {
-            specifications = specifications.and(it)
-        }
-
 
         val sortBy = SortUtil.parseSort(request.sortBy!!)
         val pageable = PageRequest.of(request.pageNumber, request.size!!, sortBy)
